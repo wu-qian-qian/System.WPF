@@ -1,0 +1,159 @@
+﻿<Page x:Class="System.UI.Main.Personnel.AttendanceManagement"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:System.UI.Main.Personnel"
+           xmlns:pu="https://opensource.panuon.com/wpf-ui"
+      Foreground="{DynamicResource FontBrush}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AttendanceManagement">
+
+
+    <Page.Resources>
+
+        <Style x:Key="RingStandardProgressBarStyle"
+         TargetType="pu:RingProgressBar">
+            <Setter Property="Minimum"
+              Value="0" />
+            <Setter Property="Maximum"
+              Value="100" />
+            <Setter Property="Width"
+              Value="120" />
+            <Setter Property="Height"
+              Value="120" />
+            <Setter Property="FontSize"
+              Value="20" />
+            <Setter Property="BorderThickness"
+              Value="18" />
+            <Setter Property="BorderBrush"
+              Value="#22FFFFFF" />
+            <Setter Property="BorderBrush"
+              Value="#226CBCEA" />
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush>
+                        <GradientStop Offset="0.00" Color="{DynamicResource Color1}" />
+                        <GradientStop Offset="0.2" Color="{DynamicResource Color2}" />
+                        <GradientStop Offset="0.4" Color="{DynamicResource Color3}" />
+                        <GradientStop Offset="0.6"  Color="{DynamicResource Color4}"/>
+                        <GradientStop Offset="0.8"  Color="{DynamicResource Color5}" />
+                        <GradientStop Offset="1" Color="{DynamicResource Color5}" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="IsPercentVisible"
+              Value="True" />
+            <Setter Property="pu:ShadowHelper.Opacity"
+              Value="15" />
+        </Style>
+
+
+        <Style x:Key="ProgressBarFormGroupStyle"
+               TargetType="pu:FormGroup">
+
+            <Setter Property="Margin"
+                    Value="0,10,0,0" />
+        </Style>
+
+        <Style x:Key="StandardProgressBarStyle"
+               TargetType="ProgressBar"
+               BasedOn="{StaticResource {x:Type ProgressBar}}">
+            <Setter Property="Minimum"
+                    Value="0" />
+            <Setter Property="Maximum"
+                    Value="100" />
+            <Setter Property="Height"
+                    Value="14" />
+            <Setter Property="pu:ProgressBarHelper.CornerRadius"
+                    Value="7" />
+            <Setter Property="pu:ProgressBarHelper.InvertedForeground"
+                    Value="#F1F1F1" />
+            <Setter Property="pu:ProgressBarHelper.IsPercentVisible"
+                    Value="True" />
+            <Setter Property="pu:ShadowHelper.ShadowDepth"
+                    Value="5" />
+            <Setter Property="pu:ShadowHelper.BlurRadius"
+                    Value="15" />
+        </Style>
+
+
+    </Page.Resources>
+
+    <Grid Background="{DynamicResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="170"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="全体员工考勤状态" Grid.Column="0"
+              FontSize="18" />
+            <pu:RingProgressBar Grid.Row="1" Grid.Column="0"
+                Style="{StaticResource RingStandardProgressBarStyle}"
+                Value="70" />
+            <TextBlock Grid.Column="1"
+              Text="各部门员工考勤状态"
+              FontSize="18" />
+            <StackPanel Grid.Row="1"
+               Grid.Column="1" >
+                <pu:FormGroup Header=" 人资 "
+                     GroupName="MyProgressBarGroup"
+                     Style="{StaticResource ProgressBarFormGroupStyle}">
+                    <ProgressBar Style="{StaticResource StandardProgressBarStyle}" Margin="10,0,10,0"
+                        Background="#224A4AFF"
+                        Foreground="{DynamicResource Bar1}"
+                        pu:ProgressBarHelper.ShadowColor="#4A4AFF"
+                        Value="90" />
+                </pu:FormGroup>
+                <pu:FormGroup Header="信息技术"
+                     GroupName="MyProgressBarGroup"
+                     Style="{StaticResource ProgressBarFormGroupStyle}">
+                    <ProgressBar Style="{StaticResource StandardProgressBarStyle}"
+                        Background="#226C6EEA" Margin="10,0,10,0"
+                        Foreground="{DynamicResource Bar2}"
+                        pu:ProgressBarHelper.ShadowColor="#6C6EEA"
+                        Value="80" />
+                </pu:FormGroup>
+                <pu:FormGroup Header="工程实施"
+                     GroupName="MyProgressBarGroup"
+                     Style="{StaticResource ProgressBarFormGroupStyle}">
+                    <ProgressBar Style="{StaticResource StandardProgressBarStyle}"
+                        Background="#229A6CEA" Margin="10,0,10,0"
+                        Foreground="{DynamicResource Bar3}"
+                        pu:ProgressBarHelper.ShadowColor="#9A6CEA"
+                        Value="70" />
+                </pu:FormGroup>
+                <pu:FormGroup Header="项目开发"
+                     GroupName="MyProgressBarGroup"
+                     Style="{StaticResource ProgressBarFormGroupStyle}">
+                    <ProgressBar Style="{StaticResource StandardProgressBarStyle}"
+                        Background="#22C56CEB"
+                        Foreground="{DynamicResource Bar4}" Margin="10,0,10,0"
+                        pu:ProgressBarHelper.ShadowColor="#C56CEB"
+                        Value="60" />
+                </pu:FormGroup>
+                <pu:FormGroup Header="产品研发"
+                     GroupName="MyProgressBarGroup"
+                     Style="{StaticResource ProgressBarFormGroupStyle}">
+                    <ProgressBar Style="{StaticResource StandardProgressBarStyle}"
+                        Background="#22EB6CE6" Margin="10,0,10,0"
+                        Foreground="{DynamicResource Bar5}"
+                        pu:ProgressBarHelper.ShadowColor="#EB6CE6"
+                        Value="50" />
+                </pu:FormGroup>
+            </StackPanel>
+        </Grid>
+
+
+    </Grid>
+
+</Page>

@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="BackgroundBrush" Color="#f2f2f2"/>
+    <SolidColorBrush x:Key="FontBrush" Color="#333333"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="#AA333333"/>
+    <SolidColorBrush x:Key="SkinColor" Color="#FFFF2B88" />
+    <SolidColorBrush x:Key="LoginBrush" Color="#31a5a3"/>
+    <SolidColorBrush x:Key="BtnMouseOver" Color="#AAAAAA"/>
+    <SolidColorBrush x:Key="Scrocllbar" Color="#9000"/>
+
+
+    <!--bar的颜色-->
+    <SolidColorBrush x:Key="Bar1" Color="#2E8B57"/>
+    <SolidColorBrush x:Key="Bar2" Color="#3CB371"/>
+    <SolidColorBrush x:Key="Bar3" Color="#20B2AA"/>
+    <SolidColorBrush x:Key="Bar4" Color="#66CDAA	"/>
+    <SolidColorBrush x:Key="Bar5" Color="#66CDAA"/>
+
+    <Color x:Key="Color1">#556B2F</Color>
+    <Color x:Key="Color2">#2E8B57</Color>
+    <Color x:Key="Color3">#3CB371</Color>
+    <Color x:Key="Color4">#20B2AA</Color>
+    <Color x:Key="Color5">#66CDAA</Color>
+
+</ResourceDictionary>

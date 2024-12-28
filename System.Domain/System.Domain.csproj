@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Forum.DomainModels">
+      <HintPath>D:\Program\论坛项目\Froum\Forum.DomainModels\bin\Debug\net6.0\Forum.DomainModels.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

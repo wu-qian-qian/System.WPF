@@ -1,0 +1,169 @@
+﻿<Page x:Class="System.UI.Main.SysMenuView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:System.UI.Main"
+      mc:Ignorable="d" 
+      xmlns:convert="clr-namespace:System.CustomControl.Converter;assembly=System.CustomControl"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:models="clr-namespace:Model;assembly=Model"
+     xmlns:custom="clr-namespace:System.CustomControl.UI.Units;assembly=System.CustomControl"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SysMenuView">
+    
+    <Page.Resources>
+        <Style x:Key="NoneBtn" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Content">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                
+                                <Setter Property="Effect" TargetName="Content">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" ShadowDepth="1" BlurRadius="10"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Storyboard x:Key="ShowPage">
+            <DoubleAnimation Storyboard.TargetName="PagePanle"
+                             Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1.2"/>
+            <DoubleAnimation Storyboard.TargetName="MenusListBox"
+                  Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)"
+                  From="400"
+                  To="0"
+                  Duration="0:0:1.35">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseInOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Page.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:ControlStoryboardAction Storyboard="{StaticResource ShowPage}">
+            </i:ControlStoryboardAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>   
+        <Grid  Background="{DynamicResource BackgroundBrush}"  x:Name="PagePanle" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"   BorderThickness="0,1,0,2" Background="{DynamicResource LoginBrush}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,0,0,0">
+                <Button Height="35" Style="{StaticResource NoneBtn}"  Width="45"  Margin="0,-5,0,0" Content="↻"  FontSize="28" 
+                        Command="{Binding ReLoaingCommand}"
+                        Background="Transparent" Foreground="{DynamicResource FontBrush}">
+                    <Button.ToolTip>
+                     刷新主菜单...
+                    </Button.ToolTip>
+                </Button>
+                <custom:UserTableBox DataContext="{Binding UserModel}"/>
+            </StackPanel>
+            
+        </Border>
+
+        <Grid Grid.Row="1" x:Name="MoudlePanle">
+            <ListBox Background="Transparent" ItemsSource="{Binding Menus}"   BorderThickness="0"  x:Name="MenusListBox" 
+                         ScrollViewer.CanContentScroll="False"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     SelectedItem="{Binding SelectMenus}"
+                     Padding="-2"
+                     >
+                <ListBox.RenderTransform>
+                    <TranslateTransform X="400"/>
+                </ListBox.RenderTransform>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,1,1,2" Background="Transparent" CornerRadius="5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Image   Source="{Binding IconUrl}" Stretch="Fill">
+                                </Image>
+                                <Border BorderThickness="0,2,0,0" BorderBrush="{DynamicResource BorderBrush}"  Grid.Row="1" >
+                                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}" Foreground="{DynamicResource FontBrush}" Margin="0,4,15,0"/>
+                                        <custom:SwithButton Height="30" Width="60" CheckBackground="{DynamicResource BtnMouseOver}" x:Name="Check"  CornerRadius="5" UnCheckBackground="{DynamicResource BtnMouseOver}"
+                                              IsChecked="{Binding  RelativeSource={RelativeSource AncestorType=ListBoxItem},Path=IsSelected,Mode=TwoWay}" />
+                                    </WrapPanel>
+                                </Border>
+                               
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <ContentPresenter Margin="10" x:Name="Content"/>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Effect" TargetName="Content">
+                                                <Setter.Value>
+                                                    <DropShadowEffect Color="Black" ShadowDepth="6" BlurRadius="10"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+                <d:ListBox.Items>
+                    <models:MenuModel Name="人事系统" IconUrl="https://webstatic.mihoyo.com/upload/contentweb/2022/08/15/ab72edd8acc105904aa50da90e4e788e_2299455865599609620.jpg"/>
+                </d:ListBox.Items>
+                
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </Grid>
+        <Frame x:Name="Region"   Visibility="{Binding IsLoadModules,Converter={convert:BoolToVisibilityConverter}}" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+        <Border Grid.Row="2" BorderBrush="{DynamicResource FontBrush}"  BorderThickness="0,2,0,0" Background="{DynamicResource LoginBrush}">
+            <Grid>
+                <Button Height="35" Style="{StaticResource NoneBtn}"  Width="45"  Margin="0,2,20,0" Content="➜" HorizontalAlignment="Right" FontSize="28" 
+           Background="Transparent" Foreground="{DynamicResource FontBrush}" 
+              Visibility="{Binding SelectMenus,Converter={convert:BoolToVisibilityConverter}}" Command="{Binding LoginModulesCommand}">
+                    <Button.ToolTip>
+                        进入系统模块....
+                    </Button.ToolTip>
+                </Button>
+
+                <Button Height="35" Style="{StaticResource NoneBtn}"  Width="45"  Margin="20,2,20,0" Content="➜" HorizontalAlignment="Left" FontSize="28" 
+                Background="Transparent" Foreground="{DynamicResource FontBrush}" 
+                Visibility="{Binding IsLoadModules,Converter={convert:BoolToVisibilityConverter}}" Command="{Binding BackGotoCommand}">
+                    <Button.LayoutTransform>
+                        <RotateTransform Angle="180"/>
+                    </Button.LayoutTransform>
+                    <Button.ToolTip>
+                        回到系统模块....
+                    </Button.ToolTip>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
